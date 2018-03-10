@@ -28,6 +28,11 @@ CreateShortCut "$SMPROGRAMS\youtube-dl\youtube-dl-not-a-gui.lnk" "$INSTDIR\youtu
 # point the new shortcut at the uninstaller youtube-dl-not-a-gui_uninstaller.exe
 CreateShortCut "$SMPROGRAMS\youtube-dl\Uninstall.lnk" "$INSTDIR\youtube-dl-not-a-gui_uninstaller.exe"
 
+# registry keys and values
+# add uninstall information to Add/Remove Programs
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\youtube-dl-not-a-gui" "DisplayName" "youtube-dl-not-a-gui"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\youtube-dl-not-a-gui" "UninstallString" "$\"$INSTDIR\youtube-dl-not-a-gui_uninstaller.exe$\""
+
 # default section end
 SectionEnd
 
@@ -37,6 +42,10 @@ Section "Uninstall"
 
 # always delete uninstaller first
 Delete $INSTDIR\youtube-dl-not-a-gui_uninstaller.exe
+
+# registry keys and values
+# remove uninstall information from Add/Remove Programs
+DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\youtube-dl-not-a-gui"
 
 # delete installed files
 Delete $INSTDIR\youtube-dl-not-a-gui.exe
